@@ -20,10 +20,11 @@ amount_label.grid(row=2, column=0)
 amount_entry = tk.Entry(window)
 amount_entry.grid(row=2, column=1)
 
-converter = ConvertCurrency(from_currency_entry, to_currency_entry, amount_entry)
+
 
 def convert_currency():
     try:
+        converter = ConvertCurrency(from_currency_entry, to_currency_entry, amount_entry)
         result = converter.getResult()
         result_label.config(text=result)
     except ValueError as e:

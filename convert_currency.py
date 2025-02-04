@@ -3,9 +3,6 @@ import requests
 API_LINK = "https://api.frankfurter.app/"
 
 class ConvertCurrency():
-
-    result = ''
-
     def __init__(self, from_currency_entry, to_currency_entry, amount_entry):
         self.from_currency = from_currency_entry.get().upper()
         self.to_currency = to_currency_entry.get().upper()
@@ -31,15 +28,16 @@ class ConvertCurrency():
                 raise Exception(f"Invalid currency: {self.to_currency}")
             
             result = data['rates'][self.to_currency]
+            return f"{self.amount} {self.from_currency} = {result} {self.to_currency}"
 
         except requests.exceptions.RequestException as e:
-                self.result =  f"Request Error", f"Error occurred: {str(e)}"
+                return f"Request Error", f"Error occurred: {str(e)}"
         except ValueError as e:
-                self.result = f"Invalid Input", f"Invalid input: {str(e)}"
+                return f"Invalid Input", f"Invalid input: {str(e)}"
         except Exception as e:
-                self.result = f"Error", str(e)
+                return f"Error", str(e)
 
-        self.result = f"{self.amount} {self.from_currency} = {result} {self.to_currency}"
+        
         
            
 
